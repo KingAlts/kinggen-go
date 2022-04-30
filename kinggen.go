@@ -28,19 +28,19 @@ func (kg *KingGen) GetAlt() (*Alt, error) {
 func makeRequest[T any](kg *KingGen, endpoint Endpoint) (T, error) {
 	res, err := http.Get(endpoint.Build(kg.apiKey))
 	if err != nil {
-		return nil, err
+		return *new(T), err
 	}
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return nil, err
+		return *new(T), err
 	}
 	if res.StatusCode >= 300 {
 		var errRes map[string]interface{}
 		err = json.Unmarshal(body, &errRes)
 		if err != nil {
-			return nil, err
+			return *new(T), err
 		}
-		return nil, errors.New(strings.ToLower(errRes["message"].(string)))
+		return *new(T), errors.New(strings.ToLower(errRes["message"].(string)))
 	}
 	var resDeserialized T
 	err = json.Unmarshal(body, &resDeserialized)
