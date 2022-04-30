@@ -6,4 +6,4 @@
 
 ## How to use
 
-$ go get github.com/KingAlts/kinggen-go
+    $ go get github.com/KingAlts/kinggen-go
