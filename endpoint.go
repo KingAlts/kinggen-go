@@ -3,14 +3,14 @@ package kinggen
 type Endpoint int
 
 const (
-	ProfileEndpoint = iota
-	AltEndpoint
+	profileEndpoint = iota
+	altEndpoint
 )
 
-func (endpoint Endpoint) Build(key string) string {
-	return "https://kinggen.wtf/api/v2/" + endpoint.ToString() + "?key=" + key
+func (endpoint Endpoint) build(key string) string {
+	return "https://kinggen.wtf/api/v2/" + endpoint.toString() + "?key=" + key
 }
 
-func (endpoint Endpoint) ToString() string {
+func (endpoint Endpoint) toString() string {
 	return []string{"profile", "alt"}[endpoint]
 }
